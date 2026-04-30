@@ -6,7 +6,8 @@ public class Customer : MonoBehaviour
     {
         if (collision.CompareTag("Customer"))
         {
-            Debug.Log("Customer is here");
+            Debug.Log("Driver is here");
+            Destroy(collision.gameObject,0.5f);
         }
     }
 }
