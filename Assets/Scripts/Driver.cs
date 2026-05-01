@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Driver : MonoBehaviour
 {
@@ -9,6 +10,13 @@ public class Driver : MonoBehaviour
     [SerializeField] float boostSpeed = 12f;
     [SerializeField] float regularSpeed = 4f;
 
+    [SerializeField] TextMeshProUGUI boostText;
+
+    void Start()
+    {
+        boostText.gameObject.SetActive(false);
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Booster"))
@@ -16,11 +24,13 @@ public class Driver : MonoBehaviour
             currentSpeed = boostSpeed;
             Debug.Log("Speed boost");
             GetComponent<ParticleSystem>().Play();
+            boostText.gameObject.SetActive(true);
         }
         else if(collision.CompareTag("Bumper"))
         {
             currentSpeed = regularSpeed;
             GetComponent<ParticleSystem>().Stop();
+            boostText.enabled = false;
             Debug.Log("Speed reduced");
         }
     }   
